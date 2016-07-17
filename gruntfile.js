@@ -18,11 +18,9 @@ function gruntConfig(grunt) {
 	Configuration.babel = {};
 
 	Configuration.babel.dist = {
-		options: {
-			sourceMap: false,
-			optional: 'es7',
-			modules: 'common'
-		},
+		exclude: /(node_modules|bower_components)/
+		presets: ['babel-preset-es2015'],
+		plugins : ['transform-es2015-modules-commonjs', 'transform-class-properties'],
 		files: [{
 			expand: true,
 			cwd: paths.base,

@@ -5,22 +5,23 @@
  * bind a method to its current context
  *
  */
-export default function autobind(props, name, descriptor) {
+export default function autobind (props, name, descriptor) {
 
-	let fn = descriptor.value;
+  let fn = descriptor.value;
 
-	if(typeof fn !== 'function')
+	if (typeof fn !== 'function') {
 		throw Error(`@autobind decorator can only be applied to methods not: ${typeof fn}`);
-	return {
-		configurable: true,
-		get: function get() {
-			var boundFn = fn.bind(this);
-			Object.defineProperty(this, name, {
-				value: boundFn,
-				configurable: true,
-				writable: true
-			});
-			return boundFn;
-		}
-	};
+	}
+  return {
+    configurable : true,
+    get          : function get () {
+      var boundFn = fn.bind(this);
+      Object.defineProperty(this, name, {
+        value        : boundFn,
+        configurable : true,
+        writable     : true
+      });
+      return boundFn;
+    }
+  };
 }
